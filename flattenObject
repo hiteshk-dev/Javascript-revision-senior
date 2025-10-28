@@ -1,0 +1,37 @@
+let result = {}
+function flattenObject(obj = {}, parentKey = "") {
+  //write your implementation here
+  for (const key in obj) {
+    let currenKey = parentKey? parentKey + "." + key :key
+    if (typeof obj[key] == 'object' && obj[key] !== null) {
+      console.log(currenKey,result)
+       result = {...flattenObject(obj[key], currenKey)}
+    }
+    else {
+      console.log('Entered',currenKey)
+      result[currenKey] = obj[key]
+    }
+  }
+  console.log('Loop',result)
+  let acc = result
+  result = {}
+  return acc
+}
+let data = {
+ 
+  user: {
+    name: "Bob",
+    age: 25,
+    contact: {
+      email: null,
+      phone: '999'
+    },
+    empty: {},
+  active: true
+  },
+  
+
+};
+console.log(flattenObject(data,));
+module.exports = flattenObject;
+
